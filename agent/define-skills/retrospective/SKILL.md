@@ -1,20 +1,21 @@
 ---
 name: retrospective
 description: >
-  Post-task retrospective — persist lessons into specs/adr (decisions) and specs/knowledge (reusable
+  Post-task retrospective — persist lessons into ./adr (decisions) and ./knowledge (reusable
   research/ops/domain notes). Use when a feature or story is done, after DoD, after a hard bug or
   architecture choice, when the user says retrospective / lessons learned / 回顾 / 总结经验, or invokes
-  /retrospective. Required gate in the dod rule before marking work complete.
+  /retrospective. Also runs at the end of learn-knowledge and other major-task workflows. Required
+  gate in the dod rule before marking work complete.
 ---
 
 # Retrospective Skill
 
 After completing a task or feature, extract lessons learned and persist them in the project repository as:
 
-1. **ADRs** (`specs/adr/`) — durable architecture / process **decisions**
-2. **Knowledge** (`specs/knowledge/`) — reusable research conclusions, ops lessons, and domain notes that are **not** themselves a decision record
+1. **ADRs** (`./adr/`) — durable architecture / process **decisions**
+2. **Knowledge** (`./knowledge/`) — reusable research conclusions, ops lessons, and domain notes that are **not** themselves a decision record
 
-Create `specs/knowledge/` (and `specs/adr/`) if missing. Do not invent a parallel knowledge tree.
+Create `./adr/` and use `./knowledge/` per project conventions (see `knowledge/README.md`, `agent/architecture.md`). Do not create a second knowledge tree (e.g. under `specs/`).
 
 ## When to Use
 
@@ -23,6 +24,7 @@ Create `specs/knowledge/` (and `specs/adr/`) if missing. Do not invent a paralle
 - After making a significant architectural or process decision
 - After research that produced durable domain or ops insight
 - When the user explicitly requests a retrospective
+- After task-done confirmation in workflows that include a `retrospective` skill step
 
 ## Process
 
@@ -54,8 +56,8 @@ Look back at the completed work and identify:
 
 | Persist as | When | Location |
 | --- | --- | --- |
-| **ADR** | A choice was made among alternatives; non-obvious; durable; team-relevant | `specs/adr/` |
-| **Knowledge** | New reusable understanding (research, ops, domain, how-to) that is not primarily a decision record | `specs/knowledge/` |
+| **ADR** | A choice was made among alternatives; non-obvious; durable; team-relevant | `./adr/` |
+| **Knowledge** | New reusable understanding (research, ops, domain, how-to) that is not primarily a decision record | `./knowledge/` (e.g. `ops/`, `methods/`, `insights/`) |
 
 **ADR-worthy** — all of:
 - **A decision** — a choice was made between alternatives
@@ -79,16 +81,16 @@ One retrospective may produce **zero or more** ADRs and **zero or more** knowled
 ### Step 3: Determine ADR Number
 
 ```bash
-ls specs/adr/
+ls adr/
 ```
 
-If `specs/adr/` does not exist, create it first.
+If `./adr/` does not exist, create it first.
 
 Next number = highest existing `ADR-{NNN}-*.md` + 1 (zero-pad to 3 digits). If none exist, start at `001`.
 
 ### Step 4: Write ADRs (if any)
 
-Create `specs/adr/ADR-{NNN}-{short-title}.md`:
+Create `adr/ADR-{NNN}-{short-title}.md`:
 
 ```markdown
 # ADR-{NNN}: {Title}
@@ -119,28 +121,19 @@ Use Chinese or English consistently with the rest of the project's documentation
 #### 5.1 Ensure knowledge home exists
 
 ```bash
-mkdir -p specs/knowledge
+mkdir -p knowledge
 ```
 
-If `specs/knowledge/README.md` is missing, create an index:
+Follow Work Agent layout under `./knowledge/` (`methods/`, `insights/`, `ops/`, etc.). If you add a new topical area, extend `knowledge/README.md` when the project uses an index there.
 
-```markdown
-# Knowledge Base
-
-Reusable research conclusions, ops lessons, and domain notes (not code truth).
-Product requirements live under `specs/`. Architecture decisions live under `specs/adr/`.
-
-## Index
-
-| Doc | Topic | Updated |
-|-----|--------|---------|
-```
+For ops-only retrospective notes, prefer `knowledge/ops/{doc-slug}.md`.
 
 #### 5.2 Choose topic folder + filename
 
-- Group by topic area: `specs/knowledge/{topic-area}/{doc-slug}.md`
-- Use project-relevant folders only (e.g. `openai/`, `maps/`, `zodiac/`, `testing/`)
+- Group by topic area: `knowledge/{topic-area}/{doc-slug}.md`
+- Use project-relevant folders only (e.g. `ops/`, `methods/`, `insights/`)
 - Reuse an existing topic folder when the subject already belongs there
+- Prefer Work Agent frontmatter when writing MCP-visible notes: `id`, `title`, `tags`, `created`, `updated`, `source`, `related[]`
 
 #### 5.3 Knowledge doc template
 
@@ -152,7 +145,6 @@ status: active | draft | superseded
 as_of: {YYYY-MM-DD}
 tags:
   - {tag}
-related_spec: specs/{relevant-spec}.md
 related:
   - knowledge/{topic}/{other-doc}.md
   - adr/ADR-{NNN}-{short-title}.md
@@ -170,13 +162,12 @@ related:
 [Reusable takeaway for future work.]
 
 ## Links
-- Related ADRs, specs, or knowledge docs
+- Related ADRs or knowledge docs
 ```
 
 Rules:
-- Knowledge is **not code truth** — product AC stays in requirements/design specs; decisions that bind the architecture go in ADRs
+- Knowledge is **not code truth** — product AC stays in requirements/design docs when those exist; decisions that bind the architecture go in ADRs
 - Link ADRs from knowledge (and vice versa) when a lesson led to a decision
-- Update `specs/knowledge/README.md` Index when adding or renaming docs
 - Prefer amending an existing knowledge doc when the topic already exists; do not duplicate
 
 ### Step 6: Commit (only when the user requests)
@@ -184,7 +175,7 @@ Rules:
 Present created/updated paths first. Commit **only** if the user asked for a commit or project workflow requires it:
 
 ```bash
-git add specs/adr/ specs/knowledge/
+git add adr/ knowledge/
 git commit -m "docs: retrospective — ADR and knowledge updates"
 ```
 
@@ -198,10 +189,10 @@ Stage only paths that changed.
 **Completed:** [feature/task name]
 
 **ADRs created:**
-- specs/adr/ADR-001-….md — [one-line why]
+- adr/ADR-001-….md — [one-line why]
 
 **Knowledge added/updated:**
-- specs/knowledge/{topic}/{doc}.md — [one-line what was learned]
+- knowledge/{topic}/{doc}.md — [one-line what was learned]
 
 **Skipped (not worth persisting):**
 - [anything considered but not saved]
@@ -213,6 +204,6 @@ If nothing is ADR- or knowledge-worthy, say so clearly — an empty retrospectiv
 
 - Quality over quantity — 1 good ADR or knowledge note beats 5 mediocre ones
 - ADRs are immutable records — never edit a past decision; create a new ADR that supersedes it
-- Knowledge docs may be updated in place when facts change; bump `as_of` and note what changed
-- ADRs live in `specs/adr/`; knowledge lives in `specs/knowledge/` — both are committed team assets
+- Knowledge docs may be updated in place when facts change; bump `as_of` or `updated` and note what changed
+- ADRs live in `./adr/`; retrospective knowledge lives in `./knowledge/` — both are committed team assets
 - Use Chinese or English consistently with the rest of the project's documentation

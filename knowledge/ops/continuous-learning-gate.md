@@ -1,12 +1,10 @@
 ---
+id: continuous-learning-gate
 title: Continuous-learning gate — workflow vs rule-only
-type: ops-lesson
-status: active
-as_of: 2026-07-27
-tags:
-  - continuous-learning
-  - workflows
-  - cursor
+tags: continuous-learning, workflows, cursor, ops
+created: "2026-07-27"
+updated: "2026-07-27"
+source: retrospective
 related:
   - adr/ADR-001-learn-knowledge-completion-gate.md
 ---
@@ -29,9 +27,9 @@ Relying on `.cursor/rules/continuous-learning.mdc` alone did not produce samectx
 1. For major interactive workflows, add explicit YAML steps: **task-completion-gate** prompt → **samectx** skill → **retrospective** skill (see `agent/define-workflows/workflow.md`).
 2. Prompts must state that **research/store yes ≠ task-done yes**.
 3. Verify project `.cursor/rules/` are active in Cursor for the workspace; treat `AGENTS.md` as backup, not the only hook.
-4. Domain deliverables → `./knowledge/`; process/ops lessons from retros → `specs/knowledge/`.
+4. Retrospective outputs: ADRs → `./adr/`; ops/process lessons → `./knowledge/ops/` (domain/method notes may use `methods/`, `insights/`, etc.).
 
 ## Links
 
-- ADR-001: encode gate in learn-knowledge YAML
+- [ADR-001](../../adr/ADR-001-learn-knowledge-completion-gate.md)
 - `.cursor/workflows/prompts/learn-knowledge/05-task-completion-gate.md`

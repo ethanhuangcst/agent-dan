@@ -407,9 +407,7 @@ Suggested repo layout when you scaffold code (names flexible):
     mcp-server/             # stdio MCP → agent-core
   apps/
     web/                   # Next.js (or similar): chat UI + API routes
-  specs/
-    adr/                   # architecture decisions
-    knowledge/             # durable process notes (retrospective)
+  adr/                     # architecture decisions (retrospective)
 ```
 
 **Makefile** (when code exists): `dev` (web + API), `up` (background stack), `down`, `test`, `lint` per project rules.
@@ -484,7 +482,7 @@ Complete **one phase to DoD** before expanding scope (**incremental-delivery**).
 
 ---
 
-## ADR candidates (record under `specs/adr/` when decided)
+## ADR candidates (record under `./adr/` when decided)
 
 1. **Language for agent-core** (TypeScript vs Python) — affects MCP SDK choice and web sharing.
 2. **Workflow schema version** and whether steps allow free-form model turns vs tool-only steps.

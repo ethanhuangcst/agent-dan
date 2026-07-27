@@ -43,9 +43,9 @@ Follow the **retrospective** skill:
 
 1. Review what went well, what was hard, and reusable lessons.
 2. Persist durable assets:
-   - **ADRs** → `specs/adr/` when a non-obvious decision was made
-   - **Knowledge** → `specs/knowledge/` for reusable research, ops, or domain notes
-3. Update `specs/knowledge/README.md` index when adding knowledge docs.
+   - **ADRs** → `./adr/` when a non-obvious decision was made
+   - **Knowledge** → `./knowledge/` (e.g. `ops/`, `methods/`, `insights/`) for reusable research, ops, or domain notes
+3. Update `knowledge/README.md` index when adding notable knowledge docs.
 4. Present a **Retrospective Summary** (ADRs, knowledge, skipped items). An empty retrospective is valid if nothing is worth persisting.
 
 Do not commit unless the user requests a commit.

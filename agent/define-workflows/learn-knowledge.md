@@ -21,7 +21,7 @@ Interactive learning: research with user in the loop, confirm before write, pers
 | 6 | store-instructions | prompt | MCP `knowledge_write` to `./knowledge/` |
 | 7 | task-completion-gate | prompt | Ask *“Can I mark this as done?”* — research **yes** ≠ task done |
 | 8 | samectx-sync | skill `samectx` | After user confirms done: `samectx sync` → `samectx-notes/` |
-| 9 | retrospective | skill `retrospective` | ADRs / `specs/knowledge/` + Retrospective Summary |
+| 9 | retrospective | skill `retrospective` | `./adr/` + `./knowledge/` + Retrospective Summary |
 
 Rule reference: [`.cursor/rules/continuous-learning.mdc`](../../.cursor/rules/continuous-learning.mdc).
 

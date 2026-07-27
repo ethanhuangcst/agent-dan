@@ -16,7 +16,7 @@ Extend production workflow `learn-knowledge` with three steps after storage:
 
 1. `task-completion-gate` (prompt) — ask *“Can I mark this as done?”*; distinguish from research confirmation.
 2. `samectx-sync` (skill `samectx`) — run after user confirms task completion.
-3. `retrospective` (skill `retrospective`) — persist to `specs/adr/` and `specs/knowledge/` as appropriate.
+3. `retrospective` (skill `retrospective`) — persist to `./adr/` and `./knowledge/` as appropriate.
 
 Document the pattern in `agent/define-workflows/workflow.md` for other major-task workflows.
 

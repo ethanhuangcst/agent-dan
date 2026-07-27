@@ -31,7 +31,7 @@ Promote drafts into production before expecting Cursor or MCP to treat them as r
 | MCP operator docs | `.cursor/MCP.md` |
 | Architecture | `agent/architecture.md` |
 | Task notes (samectx) | `samectx-notes/` |
-| Process specs | `specs/adr/`, `specs/knowledge/` |
+| ADRs | `./adr/` |
 
 Use **lowercase** `rules`, `skills`, and `workflows` under `.cursor/` for case-sensitive filesystems and [Cursor docs](https://cursor.com/docs/rules).
 

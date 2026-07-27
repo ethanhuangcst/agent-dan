@@ -19,7 +19,7 @@ Wait for explicit confirm (yes / done / approve). If the user defers or changes 
 Run the next workflow steps in order (typically skill steps already declared in YAML):
 
 1. **samectx** — `samectx sync` with `--tasks`, `--keypoints`, `--decisions` (semicolon-separated; no secrets).
-2. **retrospective** — ADRs → `specs/adr/`; process knowledge → `specs/knowledge/`; present Retrospective Summary.
+2. **retrospective** — ADRs → `./adr/`; knowledge → `./knowledge/`; present Retrospective Summary.
 
 Do not commit unless the user requests a commit.
 

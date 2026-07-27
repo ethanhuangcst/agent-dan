@@ -52,9 +52,9 @@ Steps run in **list order**. For `interactive: true`, the agent may pause betwee
 5. **Completion gate (major tasks)** — Workflows that finish a coherent deliverable (research + KB, feature slice, multi-step integration) should end with the **continuous-learning** pattern:
    - Prompt: use [`../../.cursor/workflows/prompts/_shared/task-completion-gate.md`](../../.cursor/workflows/prompts/_shared/task-completion-gate.md) (or a workflow-specific wrapper that links to it).
    - Skill: `samectx` — sync session notes to `samectx-notes/`.
-   - Skill: `retrospective` — ADRs → `specs/adr/`, process knowledge → `specs/knowledge/`.
+   - Skill: `retrospective` — ADRs → `./adr/`, knowledge → `./knowledge/` (often `ops/` for process lessons).
    - Rule reference: `.cursor/rules/continuous-learning.mdc`.
-6. **Domain knowledge vs process knowledge** — `./knowledge/` holds Work Agent domain/method notes (often via `knowledge-ops`). Retrospective output goes to `specs/` unless the user explicitly routes elsewhere.
+6. **Domain vs ops knowledge** — `./knowledge/` holds MCP-visible notes (`methods/`, `insights/`, `ops/`, etc.). Retrospective ADRs go to `./adr/`; retrospective lessons go under `./knowledge/` (typically `ops/`).
 
 ## Promotion checklist
 
