@@ -35,7 +35,9 @@ rsync -a --delete "$CANON/workflows/" "$DEST/workflows/"
 if [[ -d "$CANON/hooks" ]]; then
   rsync -a "$CANON/hooks/" "$DEST/hooks/" 2>/dev/null || true
 fi
-[[ -f "$CANON/hooks.json" ]] && cp -f "$CANON/hooks.json" "$DEST/hooks.json"
+if [[ "$IDE_DIR" != ".cursor" && -f "$CANON/hooks.json" ]]; then
+  cp -f "$CANON/hooks.json" "$DEST/hooks.json"
+fi
 
 # Cursor MCP registration (Cursor Desktop reads .cursor/mcp.json only)
 bash "$ROOT/scripts/ensure-mcp-config.sh" --sync

@@ -12,3 +12,5 @@ When a workflow is ready:
 2. Place the file under `.cursor/workflows/` (e.g. `discovery/market-scan.yaml`).
 3. Add prompt templates under `.cursor/workflows/prompts/<workflow-id>/` when using `type: prompt`.
 4. Test via MCP `workflow_list` and `workflow_run` after the MCP server is built.
+
+**Workflows in production:** `learn-knowledge`, `build-skill` (see [`build-skill.md`](build-skill.md)), `hello`.
