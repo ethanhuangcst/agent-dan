@@ -23,4 +23,6 @@ Then ask exactly:
 
 Do **not** write to `./knowledge/` until the user confirms with **yes** (or clear equivalent: "confirm", "looks good", "proceed to store").
 
+This **yes** means “proceed to **store**” only. It does **not** mark the overall major task done and does **not** authorize samectx or retrospective (see `99-task-completion-gate.mdc` / `continuous-learning.mdc`).
+
 If the user gives feedback instead of yes, proceed to the **revision-loop** step — not to storage.

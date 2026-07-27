@@ -1,0 +1,48 @@
+---
+description: Mandatory task-done gate for ANY major task in this repo — ask before closing, then samectx and retrospective. Use after learn-knowledge storage, feature slices, research deliverables, refactors, or when workflow_run reaches task-completion-gate. Do not skip because the user said yes to research or store only.
+alwaysApply: true
+---
+
+# Task completion gate (mandatory for major tasks)
+
+This rule **extends** `continuous-learning.mdc`. When its checklist applies, the gate is **required**, not optional agent discretion.
+
+## Major task checklist
+
+Treat work as a **major task** when **any** of these is true:
+
+- The user invoked a **named workflow** (e.g. `learn-knowledge`) or `workflow_run` for a deliverable
+- The user asked for a **coherent deliverable** (KB note, brief, multi-file change, integration) and substantive work is finished
+- Acceptance criteria or stated scope for the session appear met
+
+**Not** a major task: one-off Q&A, tiny single-line fix, or clearly mid-story work still in progress.
+
+If unsure whether scope is complete, ask the user — do not silently skip the gate.
+
+## Two different confirmations
+
+| User says yes to… | Allows |
+| --- | --- |
+| Research / “satisfied with summary” / “proceed to store” | `knowledge_write` or equivalent deliverable write **only** |
+| *“Can I mark this as done?”* (task completion) | samectx sync + retrospective |
+
+Never treat the first **yes** as permission to end the session without the task-done question.
+
+## Required sequence when a major task is complete
+
+1. **Stop** and ask exactly: *Can I mark this as done?*
+2. Wait for explicit confirm (yes / done / approve).
+3. Run **samectx** skill → `samectx sync` (tasks, keypoints, decisions; no secrets).
+4. Run **retrospective** skill → `./adr/`, `./knowledge/` as appropriate; present Retrospective Summary.
+
+Applies to **ad-hoc major work** (no YAML workflow) and to workflow steps after **task-completion-gate**.
+
+## Workflow runs
+
+Prefer MCP **`workflow_run`** for named workflows so all steps (including completion gate) load into context. Follow steps **in order** through samectx and retrospective.
+
+## Anti-patterns
+
+- Ending the turn right after storage or “looks good” on research
+- Skipping retrospective because the change was “only docs”
+- Deciding the rule “does not apply” without checking the checklist above

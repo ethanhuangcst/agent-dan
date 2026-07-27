@@ -302,11 +302,19 @@ export class WorkflowEngine {
       }
     }
 
+    const stepIds = steps.map((s) => s.stepId);
+    const gateIndex = stepIds.indexOf("task-completion-gate");
+    const closingSequence =
+      gateIndex >= 0
+        ? `\n**Required closing sequence:** ${stepIds.slice(gateIndex).join(" → ")}\n`
+        : "";
+
     const summary = [
       `# Workflow: ${id}`,
       interactive
-        ? "\n**Interactive workflow** — execute across multiple chat turns until the user confirms research (step summarize-and-confirm) before storage.\n"
+        ? "\n**Interactive workflow** — execute steps **in order** across multiple chat turns. Do not treat research/store confirmation as the final step; continue through task-completion-gate, samectx, and retrospective when defined in YAML.\n"
         : "",
+      closingSequence,
       "Follow steps **in order**. Apply workflow inputs where relevant.",
       "",
       "```json",

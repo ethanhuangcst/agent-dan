@@ -8,3 +8,5 @@ Follow **knowledge-ops** for this project:
 4. Tell the user the file path and a one-line summary of what was stored.
 
 Do not store until step 3 confirmation was received in this thread.
+
+Then proceed to workflow step **task-completion-gate** (continuous-learning: ask *“Can I mark this as done?”* before samectx or retrospective).

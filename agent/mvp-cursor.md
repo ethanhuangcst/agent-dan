@@ -62,7 +62,8 @@ In Cursor:
    - “Use `knowledge_search` for discovery and summarize what you find.”
    - “`knowledge_read` the getting-started note and give me three bullets.”
    - “`workflow_list` then `workflow_run` the hello workflow with theme ‘AI coaching’.”
-   - **Learn Knowledge:** “Run workflow **learn-knowledge**.” or with topic: “Start **learn-knowledge** on social media marketing.” (confirms research before `knowledge_write`.)
+   - **Learn Knowledge:** Prefer MCP **`workflow_run`** with `{ "id": "learn-knowledge", "inputs": { "topic": "…" } }` so completion-gate steps load. Natural language (“learn-knowledge on …”) is OK if the agent follows the full YAML through samectx and retrospective.
+   - After any **major task** (feature slice, KB write, multi-step scope), the agent must ask *Can I mark this as done?* then run samectx + retrospective per **`99-task-completion-gate.mdc`**.
 
 5. **Optional skill** — `/research-ops` or `/knowledge-ops`; workflows via `workflow_run`.
 

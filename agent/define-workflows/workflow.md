@@ -53,8 +53,23 @@ Steps run in **list order**. For `interactive: true`, the agent may pause betwee
    - Prompt: use [`../../.cursor/workflows/prompts/_shared/task-completion-gate.md`](../../.cursor/workflows/prompts/_shared/task-completion-gate.md) (or a workflow-specific wrapper that links to it).
    - Skill: `samectx` — sync session notes to `samectx-notes/`.
    - Skill: `retrospective` — ADRs → `./adr/`, knowledge → `./knowledge/` (often `ops/` for process lessons).
-   - Rule reference: `.cursor/rules/continuous-learning.mdc`.
-6. **Domain vs ops knowledge** — `./knowledge/` holds MCP-visible notes (`methods/`, `insights/`, `ops/`, etc.). Retrospective ADRs go to `./adr/`; retrospective lessons go under `./knowledge/` (typically `ops/`).
+   - Rule reference: `.cursor/rules/continuous-learning.mdc` and **`99-task-completion-gate.mdc`**.
+
+**Reusable YAML tail** (append to deliverable workflows):
+
+```yaml
+  - id: task-completion-gate
+    type: prompt
+    template: prompts/_shared/task-completion-gate.md
+  - id: samectx-sync
+    type: skill
+    ref: samectx
+  - id: retrospective
+    type: skill
+    ref: retrospective
+```
+
+6. **Domain vs ops knowledge** — `./knowledge/` holds MCP-visible notes (`methods/`, `insights/`, `ops/`, etc.). Retrospective ADRs go to `./adr/`; retrospective lessons go under `./knowledge/` (typically `ops/`). Ad-hoc major tasks without YAML still use the rules when the deliverable is complete.
 
 ## Promotion checklist
 

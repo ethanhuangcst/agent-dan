@@ -43,7 +43,7 @@ Do not implement duplicate knowledge or workflow logic only in prompts; use MCP 
 
 ## Precedence in this repo
 
-1. **Project rules** in `.cursor/rules/` (including this file)
+1. **Project rules** in `.cursor/rules/` (including this file and **`99-task-completion-gate.mdc`** for closing major tasks)
 2. **Project skills** in `.cursor/skills/` — read full `SKILL.md` when a workflow applies
 3. **MCP tools** for `./knowledge` and `.cursor/workflows/` side effects
 4. User global rules/skills and plugins — only when this project has no equivalent or the user requests global behavior
@@ -56,6 +56,7 @@ When adding or changing agent behavior for Work Agent, **edit production paths**
 | --- | --- |
 | `00-project-source-of-truth.mdc` | This map; draft vs production; MCP |
 | `continuous-learning.mdc` | Done gate, samectx sync, retrospective |
+| `99-task-completion-gate.mdc` | Mandatory major-task checklist; research yes ≠ task done |
 | `persistent-proactive-developer.mdc` | Finish work, real integrations, proactive next steps |
 | `writing-style.mdc` | Tone and structure for replies and docs |
 

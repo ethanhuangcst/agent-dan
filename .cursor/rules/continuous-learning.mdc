@@ -17,7 +17,14 @@ A coherent unit of work the user asked for that is **substantively finished**, f
 
 Not a major task: a single clarifying answer, one-line fix, or mid-story step still in progress.
 
-## Step 1 — Ask before closing
+When the checklist in **`99-task-completion-gate.mdc`** applies, this gate is **mandatory** — do not skip because the model judges the task “minor” without that checklist.
+
+## Research yes vs task-done yes
+
+- **Research / store confirmation** (e.g. learn-knowledge step 2–3): authorizes writing the deliverable only.
+- **Task-done confirmation** (this rule): authorizes samectx + retrospective only.
+
+Never end a major task after the first **yes** without asking *Can I mark this as done?*
 
 When you believe a major task is complete, **stop and ask the user**:
 

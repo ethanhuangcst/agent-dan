@@ -18,9 +18,18 @@ Clone URL: [ethanhuangcst/agent-dan](https://github.com/ethanhuangcst/agent-dan.
 | Skills | `.cursor/skills/<name>/SKILL.md` | `agent/define-skills/` |
 | Workflows | `.cursor/workflows/` | `agent/define-workflows/` |
 
-Start with `.cursor/rules/00-project-source-of-truth.mdc`. Prefer **project** `.cursor/` over global `~/.cursor/` defaults.
+Start with `.cursor/rules/00-project-source-of-truth.mdc` and **`99-task-completion-gate.mdc`**. Prefer **project** `.cursor/` over global `~/.cursor/` defaults.
 
 **Knowledge:** `./knowledge/` (see `knowledge/README.md`).
+
+## Major task completion
+
+After any **major task** in this repo (not only learn-knowledge):
+
+1. Ask: *Can I mark this as done?*
+2. On confirm → **samectx** → **retrospective** (`./adr/`, `./knowledge/`).
+
+See `.cursor/rules/99-task-completion-gate.mdc` and `continuous-learning.mdc`. Research/store **yes** is not task-done **yes**.
 
 ## MCP server (Cursor Agent mode)
 
@@ -31,7 +40,3 @@ The **work-agent** MCP server connects Cursor to repo knowledge and workflows:
 - **Tools:** `knowledge_search`, `knowledge_read`, `knowledge_write`, `workflow_list`, `workflow_run`
 
 Use MCP tools for validated writes and workflow execution; use rules/skills for behavior and playbooks. Enable **work-agent** under Cursor **Settings → MCP** after building `packages/mcp-server`.
-
-## Major task completion
-
-Follow `.cursor/rules/continuous-learning.mdc`: ask before marking done, then samectx sync and retrospective when the user confirms.

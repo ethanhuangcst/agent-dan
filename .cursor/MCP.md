@@ -34,6 +34,26 @@ Optional later: `WORK_AGENT_READ_ONLY=1` to disable `knowledge_write` from MCP.
 
 Tool names and JSON schemas are defined in `packages/mcp-server` and must stay aligned with **agent-core** (web API uses the same handlers).
 
+## Workflows and major-task completion
+
+For deliverable workflows (especially **`learn-knowledge`**), prefer **`workflow_run`** over informal chat so every step loads into the agent context (including **task-completion-gate**, **samectx**, **retrospective**).
+
+Example:
+
+```json
+{ "id": "learn-knowledge", "inputs": { "topic": "your topic" } }
+```
+
+Execute steps **in order** across chat turns:
+
+1. Research and user confirm → store to `./knowledge/` (research **yes** ≠ task done).
+2. **task-completion-gate** — ask *Can I mark this as done?*
+3. On task-done **yes** → **samectx** → **retrospective** (`./adr/`, `./knowledge/`).
+
+For **ad-hoc major tasks** (no workflow id), follow `.cursor/rules/99-task-completion-gate.mdc` after the deliverable is finished.
+
+After changing `packages/agent-core`, run `npm run build` from repo root so MCP serves updated `workflow_run` summaries.
+
 ## Security
 
 - Stdio transport only for desktop Cursor (local OS user trust boundary).
