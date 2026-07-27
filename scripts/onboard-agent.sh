@@ -90,4 +90,8 @@ ARGS=()
 [[ "$FRESH" == true ]] && ARGS+=(--fresh)
 
 bash "$ROOT/scripts/generate-agent-wrappers.sh"
-exec bash "$ROOT/scripts/call-agent.sh" "${ARGS[@]}"
+if ((${#ARGS[@]})); then
+  exec bash "$ROOT/scripts/call-agent.sh" "${ARGS[@]}"
+else
+  exec bash "$ROOT/scripts/call-agent.sh"
+fi
