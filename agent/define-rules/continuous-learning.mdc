@@ -1,0 +1,57 @@
+---
+description: After major tasks, confirm done then samectx sync and retrospective asset consolidation
+alwaysApply: true
+---
+
+# Continuous learning (task completion gate)
+
+Use this gate when a **major task** is complete. It complements DoD and feature acceptance; it applies to discovery, docs, and workshop work in this repo—not only shipped code.
+
+## What counts as a major task
+
+A coherent unit of work the user asked for that is **substantively finished**, for example:
+
+- A user story or feature slice meeting its stated acceptance criteria
+- A research or strategy deliverable (e.g. briefs, course outline, prompt pack)
+- A multi-step refactor or integration that was the explicit scope of the session
+
+Not a major task: a single clarifying answer, one-line fix, or mid-story step still in progress.
+
+## Step 1 — Ask before closing
+
+When you believe a major task is complete, **stop and ask the user**:
+
+> Can I mark this as done?
+
+Do **not** mark done, run sync, or run retrospective until the user **explicitly confirms** (yes / done / approve). If they defer or redirect, continue the current work or the new scope they give.
+
+## Step 2 — After confirmation only
+
+Run in order:
+
+### 2a. samectx sync
+
+Follow the **samectx** skill:
+
+1. Extract from the completed work: key tasks, keypoints, decisions (no secrets).
+2. Run `samectx sync` with `--tasks`, `--keypoints`, and `--decisions` (semicolon-separated lists).
+3. Notes land under `samectx-notes/` in this project; keep content factual and non-sensitive.
+
+### 2b. Retrospective — consolidate process assets
+
+Follow the **retrospective** skill:
+
+1. Review what went well, what was hard, and reusable lessons.
+2. Persist durable assets:
+   - **ADRs** → `specs/adr/` when a non-obvious decision was made
+   - **Knowledge** → `specs/knowledge/` for reusable research, ops, or domain notes
+3. Update `specs/knowledge/README.md` index when adding knowledge docs.
+4. Present a **Retrospective Summary** (ADRs, knowledge, skipped items). An empty retrospective is valid if nothing is worth persisting.
+
+Do not commit unless the user requests a commit.
+
+## Anti-patterns
+
+- Assuming completion without asking
+- Running samectx or retrospective before user confirmation
+- Skipping retrospective because the task was “only docs” when lessons or decisions are worth keeping

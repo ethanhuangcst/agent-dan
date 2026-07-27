@@ -1,0 +1,15 @@
+{
+  "name": "work-agent",
+  "private": true,
+  "workspaces": [
+    "packages/agent-core",
+    "packages/mcp-server"
+  ],
+  "scripts": {
+    "build": "npm run build -w @work-agent/agent-core && npm run build -w @work-agent/mcp-server",
+    "test": "npm run test -w @work-agent/agent-core",
+    "call-agent-dan": "bash scripts/call-agent.sh",
+    "onboard-agent-dan": "bash scripts/onboard-agent.sh",
+    "rename-agent-dan": "bash scripts/rename-agent.sh"
+  }
+}
