@@ -5,10 +5,14 @@ set -euo pipefail
 REPO_URL=""
 TARGET_DIR=""
 FRESH=false
+IDE_ARG=""
+IDE_OTHER=""
+NON_INTERACTIVE=false
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
   echo "Usage: onboard-agent-[slug] [--repo URL] [--dir PATH] [--fresh]"
+  echo "         [--ide cursor|claude|codex] [--other NAME] [--non-interactive]"
   echo "  --repo URL   Git clone URL (or set WORK_AGENT_REPO_URL / agent/default-repo.url)"
   echo "  --dir PATH   Clone into PATH (default: ./work-agent next to cwd, or use existing repo)"
   echo "  --fresh      Force npm install and rebuild"
@@ -21,6 +25,9 @@ while [[ $# -gt 0 ]]; do
     --repo) REPO_URL="$2"; shift 2 ;;
     --dir) TARGET_DIR="$2"; shift 2 ;;
     --fresh) FRESH=true; shift ;;
+    --ide) IDE_ARG="$2"; shift 2 ;;
+    --other) IDE_OTHER="$2"; shift 2 ;;
+    --non-interactive) NON_INTERACTIVE=true; shift ;;
     --help|-h) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
   esac
@@ -85,6 +92,17 @@ if [[ ! -f "$ROOT/agent/agent-name" ]]; then
 fi
 
 echo "→ Onboarding agent ${AGENT_DISPLAY_NAME} (${AGENT_SLUG})"
+
+SELECT_ARGS=()
+[[ -n "$IDE_ARG" ]] && SELECT_ARGS+=(--ide "$IDE_ARG")
+[[ -n "$IDE_OTHER" ]] && SELECT_ARGS+=(--other "$IDE_OTHER")
+[[ "$NON_INTERACTIVE" == true ]] && SELECT_ARGS+=(--non-interactive)
+bash "$ROOT/scripts/select-ide.sh" "${SELECT_ARGS[@]}"
+# shellcheck source=read-ide-target.sh
+source "$ROOT/scripts/read-ide-target.sh"
+echo "→ Target folder: $IDE_DIR/ ($IDE_LABEL)"
+bash "$ROOT/scripts/deploy-ide-assets.sh"
+bash "$ROOT/scripts/verify-ide-setup.sh" --strict
 
 ARGS=()
 [[ "$FRESH" == true ]] && ARGS+=(--fresh)

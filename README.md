@@ -26,7 +26,7 @@ Personalized AI agent for product discovery and strategy (innovation work before
 
 | Command | When |
 | --- | --- |
-| `./onboard-agent-dan` | **First time** — clone (if needed), install, build, open Cursor |
+| `./onboard-agent-dan` | **First time** — choose IDE (Cursor / Claude / Codex / Other), deploy rules/skills/workflows to `.{ide}/`, install, build, open IDE |
 | `./call-agent-dan` | **Daily** — install/build if needed, open Cursor |
 | `./rename-agent-dan <slug>` | Rename agent (regenerates `call/onboard/rename-*` entrypoints) |
 
@@ -34,9 +34,13 @@ Agent slug is stored in [`agent/agent-name`](agent/agent-name). Default clone UR
 
 ```bash
 ./onboard-agent-dan
-# or: ./call-agent-dan
+# prompts: A Claude / B Codex / C Cursor / D Other → deploys to .cursor, .claude, .codex, etc.
+# or: ./onboard-agent-dan --ide cursor --non-interactive
+./call-agent-dan
 ```
 
-Then use **Agent mode** in Cursor. MCP **work-agent** starts automatically.
+Onboard writes [`agent/ide-target`](agent/ide-target) (`IDE_DIR`), restores `.cursor/` from git, deploys to `$IDE_DIR`, and verifies with `bash scripts/verify-ide-setup.sh --strict`. Re-sync after pull: `bash scripts/deploy-ide-assets.sh`.
+
+Then use **Agent mode** in Cursor (or load `$IDE_DIR/rules` and `$IDE_DIR/skills` in your IDE). MCP **work-agent** uses `IDE_DIR` for workflows/skills when set.
 
 See `.cursor/rules/00-project-source-of-truth.mdc` for precedence and paths.

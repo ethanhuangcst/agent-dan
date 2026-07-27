@@ -1,0 +1,24 @@
+{
+  "projectName": "agent-dan",
+  "username": "Ethan_Huang",
+  "timestamp": "2026-07-27T15:59:19.800Z",
+  "summary": "对话包含 3 个任务、3 个关键点和 2 个决策",
+  "tasks": [
+    "Diagnose continuous-learning triggers",
+    "Add Cursor hooks for task gate",
+    "Restore AskQuestion workflow prompt via define-workflows overlay"
+  ],
+  "keyPoints": [
+    "Rules alone do not run samectx",
+    "git restore had reverted task-completion-gate prompt",
+    "stop hook followup when 2+ file edits"
+  ],
+  "decisions": [
+    "Trigger stack: AskQuestion plus workflow_run plus hooks.json",
+    "agent/define-workflows/prompts overlay on ensure-ide-canonical"
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "tool": "samectx"
+  }
+}

@@ -19,7 +19,7 @@ Interactive learning: research with user in the loop, confirm before write, pers
 | 4 | revision-loop | prompt | Re-research on feedback until user says yes to **store** |
 | 5 | store | skill `knowledge-ops` | Dedupe, consolidate |
 | 6 | store-instructions | prompt | MCP `knowledge_write` to `./knowledge/` |
-| 7 | task-completion-gate | prompt | Ask *“Can I mark this as done?”* — research **yes** ≠ task done |
+| 7 | task-completion-gate | prompt | **AskQuestion** — **Mark task done** / Not yet / Pause; research **yes** ≠ task done |
 | 8 | samectx-sync | skill `samectx` | After user confirms done: `samectx sync` → `samectx-notes/` |
 | 9 | retrospective | skill `retrospective` | `./adr/` + `./knowledge/` + Retrospective Summary |
 

@@ -9,4 +9,4 @@ Follow **knowledge-ops** for this project:
 
 Do not store until step 3 confirmation was received in this thread.
 
-Then proceed to workflow step **task-completion-gate** (continuous-learning: ask *“Can I mark this as done?”* before samectx or retrospective).
+Then proceed to workflow step **task-completion-gate** (continuous-learning: **AskQuestion** — **Mark task done** before samectx or retrospective).

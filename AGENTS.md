@@ -4,7 +4,7 @@ This repo trains a personalized AI agent for product discovery and strategy (see
 
 | Command | Purpose |
 | --- | --- |
-| `./onboard-agent-dan` | First-time: clone repo (optional), install, build, open Cursor |
+| `./onboard-agent-dan` | First-time: choose IDE (Claude/Codex/Cursor/Other), deploy to `.{ide}/`, install, build, open IDE |
 | `./call-agent-dan` | Routine: prepare MCP + open Cursor |
 | `./rename-agent-dan <slug>` | Rename agent and refresh entrypoint scripts |
 
@@ -26,8 +26,8 @@ Start with `.cursor/rules/00-project-source-of-truth.mdc` and **`99-task-complet
 
 After any **major task** in this repo (not only learn-knowledge):
 
-1. Ask: *Can I mark this as done?*
-2. On confirm → **samectx** → **retrospective** (`./adr/`, `./knowledge/`).
+1. **AskQuestion** task-done gate (**Mark task done** / Not yet / Pause) — not bare chat **yes** after research/store.
+2. On **Mark task done** → **samectx** → **retrospective** (`./adr/`, `./knowledge/`).
 
 See `.cursor/rules/99-task-completion-gate.mdc` and `continuous-learning.mdc`. Research/store **yes** is not task-done **yes**.
 

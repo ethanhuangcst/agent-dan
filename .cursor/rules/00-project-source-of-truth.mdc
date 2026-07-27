@@ -32,6 +32,7 @@ Promote drafts into production before expecting Cursor or MCP to treat them as r
 | Architecture | `agent/architecture.md` |
 | Task notes (samectx) | `samectx-notes/` |
 | ADRs | `./adr/` |
+| Active IDE | `agent/ide-target` → `IDE_DIR` (`.cursor`, `.claude`, …) — see [`agent/IDE-ONBOARD.md`](../../agent/IDE-ONBOARD.md) |
 
 Use **lowercase** `rules`, `skills`, and `workflows` under `.cursor/` for case-sensitive filesystems and [Cursor docs](https://cursor.com/docs/rules).
 

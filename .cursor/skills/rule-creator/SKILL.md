@@ -22,20 +22,6 @@ The Rule Creator workflow has three phases:
 
 ### Phase 1: Inventory (deterministic collection)
 
-**In the Work Agent repo**, scan project assets first:
-
-- Skills: `.cursor/skills/*/SKILL.md`
-- Rules: `.cursor/rules/*.mdc` (see `00-project-source-of-truth.mdc`)
-
-If the rule-creator scripts exist under the project skill folder, run them from the repo root:
-
-```bash
-bash .cursor/skills/rule-creator/scripts/scan-skills.sh   # when present
-bash .cursor/skills/rule-creator/scripts/scan-rules.sh    # when present
-```
-
-Otherwise use the global plugin copy (paths below).
-
 #### 1a. Collect skill list
 
 ```bash

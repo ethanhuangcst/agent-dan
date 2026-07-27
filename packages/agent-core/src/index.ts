@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
 import path from "node:path";
 
 export type KnowledgeHit = {
@@ -156,8 +157,16 @@ export type WorkflowStepResult = {
 export class WorkflowEngine {
   constructor(private readonly root: string) {}
 
+  private ideRoot(): string {
+    return resolveIdeDir(this.root);
+  }
+
   private workflowsDir(): string {
-    return path.join(this.root, ".cursor", "workflows");
+    return path.join(this.ideRoot(), "workflows");
+  }
+
+  private skillPath(ref: string): string {
+    return path.join(this.ideRoot(), "skills", ref, "SKILL.md");
   }
 
   async list(): Promise<{ workflows: WorkflowSummary[] }> {
@@ -251,13 +260,7 @@ export class WorkflowEngine {
       const template = stepRaw.match(/template:\s*(\S+)/)?.[1];
 
       if (type === "skill" && ref) {
-        const skillPath = path.join(
-          this.root,
-          ".cursor",
-          "skills",
-          ref,
-          "SKILL.md",
-        );
+        const skillPath = this.skillPath(ref);
         try {
           const skillBody = await fs.readFile(skillPath, "utf8");
           steps.push({
@@ -306,7 +309,7 @@ export class WorkflowEngine {
     const gateIndex = stepIds.indexOf("task-completion-gate");
     const closingSequence =
       gateIndex >= 0
-        ? `\n**Required closing sequence:** ${stepIds.slice(gateIndex).join(" → ")}\n`
+        ? `\n**Required closing sequence:** ${stepIds.slice(gateIndex).join(" → ")}\nAt **task-completion-gate**, use **AskQuestion** with **Mark task done** / Not yet / Pause — do not treat research/store **yes** as task done.\n`
         : "";
 
     const summary = [
@@ -343,4 +346,23 @@ export function resolveWorkAgentRoot(): string {
     return path.resolve(env);
   }
   return process.cwd();
+}
+
+/** Project IDE asset root (e.g. .cursor, .claude) — see agent/ide-target */
+export function resolveIdeDir(root: string): string {
+  const env = process.env.WORK_AGENT_IDE_DIR?.trim();
+  if (env) {
+    return path.isAbsolute(env) ? env : path.join(root, env);
+  }
+  const target = path.join(root, "agent", "ide-target");
+  try {
+    const text = fsSync.readFileSync(target, "utf8");
+    const m = text.match(/^IDE_DIR=(.+)$/m);
+    if (m?.[1]) {
+      return path.join(root, m[1].trim());
+    }
+  } catch {
+    // default
+  }
+  return path.join(root, ".cursor");
 }

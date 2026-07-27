@@ -21,7 +21,7 @@ Build AI agents for any domain — customer service, research, operations, creat
 
 ## Work Agent repo (this project)
 
-When building **this** agent, follow [`agent/architecture.md`](../../../agent/architecture.md):
+When building **this** agent, follow [`agent/architecture.md`](../../architecture.md):
 
 - Cursor: rules/skills in `.cursor/` + **work-agent** MCP (`packages/mcp-server`, `.cursor/mcp.json`)
 - Knowledge: `./knowledge/` via MCP `knowledge_*` tools

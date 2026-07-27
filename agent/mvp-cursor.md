@@ -33,7 +33,10 @@ Goal: use **Agent mode** in this repo with **work-agent** MCP tools over `./know
 ```bash
 ./onboard-agent-dan
 # clones https://github.com/ethanhuangcst/agent-dan.git when run outside the repo
+# asks which IDE you use (Claude / Codex / Cursor / Other) and deploys rules, skills, workflows to .{ide}/
 ```
+
+Non-interactive: `./onboard-agent-dan --ide cursor --non-interactive`
 
 **Already have the repo:**
 
@@ -63,7 +66,7 @@ In Cursor:
    - “`knowledge_read` the getting-started note and give me three bullets.”
    - “`workflow_list` then `workflow_run` the hello workflow with theme ‘AI coaching’.”
    - **Learn Knowledge:** Prefer MCP **`workflow_run`** with `{ "id": "learn-knowledge", "inputs": { "topic": "…" } }` so completion-gate steps load. Natural language (“learn-knowledge on …”) is OK if the agent follows the full YAML through samectx and retrospective.
-   - After any **major task** (feature slice, KB write, multi-step scope), the agent must ask *Can I mark this as done?* then run samectx + retrospective per **`99-task-completion-gate.mdc`**.
+   - After any **major task** (feature slice, KB write, multi-step scope), the agent must use **AskQuestion** (**Mark task done** / Not yet / Pause) then run samectx + retrospective per **`99-task-completion-gate.mdc`**.
 
 5. **Optional skill** — `/research-ops` or `/knowledge-ops`; workflows via `workflow_run`.
 
